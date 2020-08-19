@@ -62,7 +62,7 @@ var config ={
         "className": "airGalaxy",
         "y": 100,
         "x": 100,
-        "imgUrl": "123.png",
+        "imgUrl": "mainAir.png",
         "height": 80,
         "width": 80
     },

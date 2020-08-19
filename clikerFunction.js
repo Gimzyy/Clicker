@@ -75,12 +75,67 @@ function createMainAir(mainAirConf) {
         step: function () {
             this.x = mouseX ;
             this.y = mouseY;
-            // this.div.style.top = this.y + 'px';
-            // this.div.style.left = this.x + 'px';
+            this.div.style.top = this.y + 'px';
+            this.div.style.left = this.x + 'px';
         }
-    }
+    };
 
     return addMainAir;
+}
+
+
+function createBullet(mainBulletConf) {
+    let bulletMain = document.createElement('div');
+    bulletMain.classList.add(mainBulletConf.className);
+    bulletMain.style.top = mainBulletConf.y + 'px';
+    bulletMain.style.left = mainBulletConf.x + 'px';
+    bulletMain.style.backgroundImage = "url("+mainBulletConf.imgUrl+")";
+    bulletMain.style.height = mainBulletConf.height + 'px';
+    bulletMain.style.width = mainBulletConf.width + 'px';
+    document.body.append(bulletMain);
+
+    let addBulletMain = {
+        div: bulletMain,
+        x: mainBulletConf.x,
+        y: mainBulletConf.y,
+        bullTop: 0,
+        step: function () {
+            this.x = mouseX;
+            this.y = mouseY;
+            this.div.style.left = this.x + 27 + 'px';
+            this.div.style.top = this.y + -20 + 'px';
+        }
+    };
+
+    return addBulletMain;
+}
+
+
+function createDblBullet(mainBulletConf2) {
+    let bulletMain2 = document.createElement('div');
+    bulletMain2.classList.add(mainBulletConf2.className);
+    bulletMain2.style.top = mainBulletConf2.y + 'px';
+    bulletMain2.style.left = mainBulletConf2.x + 'px';
+    bulletMain2.style.backgroundImage = "url("+mainBulletConf2.imgUrl+")";
+    bulletMain2.style.height = mainBulletConf2.height + 'px';
+    bulletMain2.style.width = mainBulletConf2.width + 'px';
+    bulletMain2.style.display = 'none';
+    document.body.append(bulletMain2);
+
+    let addDblBulletMain = {
+        div: bulletMain2,
+        x: mainBulletConf2.x,
+        y: mainBulletConf2.y,
+        bullTop: 0,
+        step: function () {
+            this.x = mouseX;
+            this.y = mouseY;
+            this.div.style.left = this.x + 40 + 'px';
+            this.div.style.top = this.y + -20 + 'px';
+        }
+    };
+
+    return addDblBulletMain;
 }
 
 
@@ -98,15 +153,20 @@ function clickerFunction() {
                 }
 
                this.mainAir.step();
+                this.bulletMain.step();
+                this.bulletMain2.step();
             },100)
 
 
         },
+
         init: function(configuration) {
 
             this.config = configuration;
             this.mainAir = createMainAir(this.config.userConfig);
-
+            this.bulletMain = createBullet(this.config.bulletConfig);
+            this.bulletMain2 = createDblBullet(this.config.dblBulletConfig);
+            
             console.log(this.config);
             for (let i = 0; i < this.config.enemiesConfig.length; i++){
                 for (let j = 0; j < 1; j++){
