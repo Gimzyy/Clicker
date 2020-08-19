@@ -1,0 +1,317 @@
+html, body{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    perspective: 500px;
+    overflow: hidden;
+    user-select: none;
+    cursor: default;
+}
+
+#wrapper{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-image: url("media/img/main.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+}
+
+/* Loading Page*/
+
+#loading_page{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("media/img/loading.jpg");
+    background-size: cover;
+    transition: 2.5s;
+    z-index: 100;
+}
+
+.loadingBar{
+    width: 30%;
+    height: 40px;
+    border: 2px solid aqua;
+    border-radius: 5px;
+    position: absolute;
+    top: 80%;
+    left: calc(50% - 15%);
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+#progressLoading{
+    background-color: darkviolet;
+    height: 90%;
+    border-radius: 5px;
+
+}
+
+.shot1{
+    position: absolute;
+    background-image: url("media/img/fire.png");
+    background-size: auto  100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 2s linear;
+    display: none;
+    z-index: 50;
+}
+
+/*@keyframes shot {*/
+/*    0%{*/
+/*        top: 0;*/
+/*    }*/
+/*    100%{*/
+/*        top: -100%;*/
+/*    }*/
+/*}*/
+
+/* Air Galaxy */
+
+#airGalaxy{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+}
+
+#airGalaxy img{
+    height: 100%;
+    width: 100%;
+}
+
+/* Bad Air */
+
+
+.allBadAir{
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    animation: enemy1 6s  linear 7.5s infinite;
+    transition: 6s;
+    z-index: 40;
+}
+
+
+@keyframes enemy1 {
+    0%{
+        top: -20%;
+    }
+
+    100%{
+        top: 114%;
+    }
+}
+
+#counter{
+    height: 50px;
+    width: 100px;
+    color: aqua;
+    font-size: 36px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Arial,sans-serif;
+    position: absolute;
+    left: 60px;
+    top: 40px;
+    border-radius: 5px;
+    border: 1px solid aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.mainMenu{
+    width: 100px;
+    height: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid aqua;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    z-index: 2;
+    cursor: default;
+}
+
+#shop{
+    width: 100%;
+    height: calc(100% / 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    background-color: peru;
+}
+#shop img{
+    height: 60%;
+    width: 60%;
+
+}
+#shop img:hover{
+    filter:drop-shadow(0px 0px 4px aqua) ;
+}
+
+#options{
+    width: 100%;
+    height: calc(100% / 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    background-color: peru;
+}
+
+#options img{
+    height: 60%;
+    width: 60%;
+}
+#options img:hover{
+    filter:drop-shadow(0px 0px 4px aqua) ;
+}
+
+#reference{
+    width: 100%;
+    height: calc(100% / 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: peru;
+    outline: none;
+}
+
+#reference img{
+    height: 60%;
+    width: 60%;
+}
+#reference img:hover{
+    filter:drop-shadow(0px 0px 4px aqua) ;
+}
+
+.menuBox{
+    height: 300px;
+    width: 200px;
+    background-color: maroon;
+    border-left: 1px solid aqua;
+    border-bottom: 1px solid aqua;
+    border-top: 1px solid aqua;
+    transition: 1s;
+    cursor: default;
+}
+
+#shopBox{
+     height: 300px;
+     width: 200px;
+     position: absolute;
+     top: 0;
+     right: -200px;
+     display: none;
+ }
+
+.Upgrade{
+    height: calc(100% / 3);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.descriptionUpdate{
+    height: 80%;
+    width: 70%;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.descriptionUpdate img{
+    height: 35%;
+    width: 15%;
+    margin: 0 5px 0 5px;
+}
+
+
+.btnUpdate{
+    height: 40%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+#optionsBox{
+    height: 300px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    right: -200px;
+    display: none;
+}
+
+#referenceBox{
+    height: 300px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    right: -200px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: none;
+}
+
+#referenceBox span{
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+
+}
+
+.audioPlayer{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    border: 1px solid aqua;
+    background-color: peru;
+    border-radius: 50px;
+    cursor: default;
+    outline: none;
+
+}
+
+#btnMute{
+    background-image: url("media/img/speaker.png");
+    background-size: 80% 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.audioPlayer img{
+    height: 80%;
+    width: 80%;
+}
+
+#Player{
+    display: none;
+}
