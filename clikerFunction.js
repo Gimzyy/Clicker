@@ -4,15 +4,12 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-var mouseX = null;
-var mouseY = null;
+let displayHeight = document.body.clientHeight;
+let displayWidth = document.body.clientWidth;
 
-document.addEventListener('mousemove', getMouseMove);
 
-function getMouseMove(event) {
-    mouseX = event.pageX;
-    mouseY = event.pageY;
-}
+
+
 
 function createEnemy(enemyConf) {
         let enemyBad = document.createElement('div');
@@ -28,6 +25,8 @@ function createEnemy(enemyConf) {
             div: enemyBad,
             x: enemyConf.x,
             y: enemyConf.y,
+            height: enemyConf.height,
+            width: enemyConf.width,
             direction: null,
             counter: 0,
 
@@ -71,14 +70,15 @@ function createMainAir(mainAirConf) {
         x: mainAirConf.x,
         y: mainAirConf.y,
 
-
-        step: function () {
-            this.x = mouseX ;
-            this.y = mouseY;
+        step: function (x,y) {
+            this.x = x ;
+            this.y = y;
             this.div.style.top = this.y + 'px';
             this.div.style.left = this.x + 'px';
         }
     };
+
+
 
     return addMainAir;
 }
@@ -96,15 +96,19 @@ function createBullet(mainBulletConf) {
 
     let addBulletMain = {
         div: bulletMain,
-        x: mainBulletConf.x,
-        y: mainBulletConf.y,
-        bullTop: 0,
-        step: function () {
-            this.x = mouseX;
-            this.y = mouseY;
-            this.div.style.left = this.x + 27 + 'px';
-            this.div.style.top = this.y + -20 + 'px';
-        }
+        x: mainBulletConf.x ,
+        y: mainBulletConf.y ,
+        step: function  (){
+            // if(this.x === undefined || this.x === null || this.y === undefined || this.y === null){
+            //     return;
+            // }
+            this.y -= 20;
+            this.div.style.left = this.x + 'px';
+            this.div.style.top = this.y+ 'px';
+
+
+        },
+
     };
 
     return addBulletMain;
@@ -142,19 +146,50 @@ function createDblBullet(mainBulletConf2) {
 
 function clickerFunction() {
     return {
+        mouseX : null,
+        mouseY : null,
+        mainAir: null,
+        setMouseXY: function(event) {
+            this.mouseY = event.pageY;
+            this.mouseX = event.pageX;
+            this.mainAir.step(this.mouseX,this.mouseY);
+        },
+        shot: function(event) {
+            let bulConf = this.config.bulletConfig;
+            bulConf.x = event.pageX + 26;
+            bulConf.y = event.pageY - 20;
+            this.bulletMain = createBullet(bulConf);
+            this.shots.push(this.bulletMain);
+        },
         config: {},
         enemies: [],
-        mainAir: null,
+        shots: [],
         timer: null,
         run: function(){
+
+            // if (this.enemies.x === this.shots.x && this.enemies.y === this.shots.y){
+            //     console.log('!!!!!')
+            // }
            this.timer = setInterval( () => {
                 for (let i = 0; i < this.enemies.length; i++){
-                    this.enemies[i].step();
+                    let tmpEnemy = this.enemies[i];
+                    tmpEnemy.step();
+
+                        for (let j = 0; j < this.shots.length; j++){
+                            let tmpShot = this.shots[j];
+                            tmpShot.step();
+                            if (tmpShot.x >= tmpEnemy.x  && tmpShot.x <= tmpEnemy.x + tmpEnemy.width && tmpShot.y >= tmpEnemy.y &&  tmpShot.y <= tmpEnemy.y + tmpEnemy.height){
+                                console.log('!!!!!');
+                            }
+                        }
                 }
 
-               this.mainAir.step();
-                this.bulletMain.step();
-                this.bulletMain2.step();
+
+
+
+
+
+                // this.bulletMain2.step();
             },100)
 
 
@@ -162,9 +197,9 @@ function clickerFunction() {
 
         init: function(configuration) {
 
+
             this.config = configuration;
             this.mainAir = createMainAir(this.config.userConfig);
-            this.bulletMain = createBullet(this.config.bulletConfig);
             this.bulletMain2 = createDblBullet(this.config.dblBulletConfig);
 
             console.log(this.config);
@@ -172,12 +207,14 @@ function clickerFunction() {
                 for (let j = 0; j < 1; j++){
                     let tmp = createEnemy(this.config.enemiesConfig[i]);
                     this.enemies.push(tmp);
+
                 }
             }
 
-                console.log(this)
+                console.log(this.shots)
+            document.addEventListener('mousemove', (event) => this.setMouseXY(event));
+            document.addEventListener('click',(event) => this.shot(event));
         },
-
 
 
 
@@ -190,6 +227,7 @@ let game = clickerFunction();
 game.init(configuration);
 
 game.run();
+
 
 //
 // function getRandomInt(min, max) {

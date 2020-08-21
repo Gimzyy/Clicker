@@ -1,11 +1,10 @@
 html, body{
     margin: 0;
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    perspective: 500px;
     overflow: hidden;
     user-select: none;
-    cursor: default;
+    cursor: none;
 }
 
 #wrapper{
@@ -61,6 +60,7 @@ html, body{
     background-position: center;
     display: block;
     z-index: 50;
+
 }
 
 /*@keyframes shot {*/
@@ -96,8 +96,6 @@ html, body{
     position: absolute;
     background-repeat: no-repeat;
     background-size: 100% auto;
-    animation: enemy1 6s  linear 7.5s infinite;
-    transition: 6s;
     z-index: 40;
 }
 
