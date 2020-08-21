@@ -166,7 +166,7 @@ function clickerFunction() {
             this.mainAir = createMainAir(this.config.userConfig);
             this.bulletMain = createBullet(this.config.bulletConfig);
             this.bulletMain2 = createDblBullet(this.config.dblBulletConfig);
-            
+
             console.log(this.config);
             for (let i = 0; i < this.config.enemiesConfig.length; i++){
                 for (let j = 0; j < 1; j++){
