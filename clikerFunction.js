@@ -7,7 +7,7 @@ function getRandomInt(min, max) {
 let displayHeight = document.body.clientHeight;
 let displayWidth = document.body.clientWidth;
 
-
+let score = 0;
 
 
 
@@ -34,6 +34,10 @@ function createEnemy(enemyConf) {
                 this.y += 10;
                 this.div.style.top =this.y + 'px';
 
+                if(this.y >= displayHeight){
+                    this.div.remove();
+                    // document.body.style.filter = 'blur(5px)';
+                }
                 
 
                 if (this.direction === null || this.counter === 20){
@@ -106,6 +110,9 @@ function createBullet(mainBulletConf) {
             this.div.style.left = this.x + 'px';
             this.div.style.top = this.y+ 'px';
 
+            if (this.y <= 0){
+                this.div.remove();
+            }
 
         },
 
@@ -165,6 +172,7 @@ function clickerFunction() {
         enemies: [],
         shots: [],
         timer: null,
+        timer2: null,
         run: function(){
 
             // if (this.enemies.x === this.shots.x && this.enemies.y === this.shots.y){
@@ -180,6 +188,8 @@ function clickerFunction() {
                             tmpShot.step();
                             if (tmpShot.x >= tmpEnemy.x  && tmpShot.x <= tmpEnemy.x + tmpEnemy.width && tmpShot.y >= tmpEnemy.y &&  tmpShot.y <= tmpEnemy.y + tmpEnemy.height){
                                 console.log('!!!!!');
+                                counter.textContent = score++;
+
                             }
                         }
                 }
@@ -203,6 +213,8 @@ function clickerFunction() {
             this.bulletMain2 = createDblBullet(this.config.dblBulletConfig);
 
             console.log(this.config);
+
+
             for (let i = 0; i < this.config.enemiesConfig.length; i++){
                 for (let j = 0; j < 1; j++){
                     let tmp = createEnemy(this.config.enemiesConfig[i]);
