@@ -41,8 +41,8 @@ var config ={
             "y": -200,
             "x": 600,
             "imgUrl": "war4.png",
-            "height": 30,
-            "width": 30
+            "height": 55,
+            "width": 55
         },
 
         {

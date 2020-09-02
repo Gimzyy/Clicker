@@ -53,7 +53,7 @@ function createEnemy(enemyConf) {
                 }
                 this.counter++;
             }
-        }
+        };
 
     return addEnemy;
 }
@@ -189,18 +189,15 @@ function clickerFunction() {
                             if (tmpShot.x >= tmpEnemy.x  && tmpShot.x <= tmpEnemy.x + tmpEnemy.width && tmpShot.y >= tmpEnemy.y &&  tmpShot.y <= tmpEnemy.y + tmpEnemy.height){
                                 console.log('!!!!!');
                                 counter.textContent = score++;
+                                delete tmpEnemy.step();
+                                this.enemies[i].div.style.backgroundImage = "url('media/img/explosion.png')";
 
                             }
                         }
                 }
 
-
-
-
-
-
                 // this.bulletMain2.step();
-            },100)
+            },150)
 
 
         },
@@ -216,14 +213,15 @@ function clickerFunction() {
 
 
             for (let i = 0; i < this.config.enemiesConfig.length; i++){
-                for (let j = 0; j < 1; j++){
+                for (let j = 0; j < 25; j++){
                     let tmp = createEnemy(this.config.enemiesConfig[i]);
                     this.enemies.push(tmp);
 
                 }
             }
 
-                console.log(this.shots)
+                console.log(this.shots);
+                console.log(this.enemies);
             document.addEventListener('mousemove', (event) => this.setMouseXY(event));
             document.addEventListener('click',(event) => this.shot(event));
         },
